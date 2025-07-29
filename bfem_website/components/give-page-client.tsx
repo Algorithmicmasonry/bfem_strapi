@@ -33,14 +33,14 @@ export default function GivePageClient() {
   const [email, setEmail] = useState<string>("");
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [PaystackPop, setPaystackPop] = useState<any>(null); // State to hold the dynamically imported PaystackPop
+  const [PaystackPop, setPaystackPop] = useState<null | typeof import("@paystack/inline-js")>(null);
 
   useEffect(() => {
     // Dynamically import PaystackPop only on the client-side
     async function loadPaystack() {
       if (typeof window !== "undefined") { // Double-check if window is defined (extra caution)
-        const module = await import("@paystack/inline-js");
-        setPaystackPop(() => module.default); // Assuming it's a default export
+        const myModule = await import("@paystack/inline-js");
+        setPaystackPop(() => myModule.default); // Assuming it's a default export
       }
     }
     loadPaystack();
@@ -89,6 +89,7 @@ export default function GivePageClient() {
       const { access_code } = data;
       const paystack = new PaystackPop(); // Now PaystackPop is guaranteed to be available
       paystack.resumeTransaction(access_code, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onSuccess: async (transaction: any) => {
           // Verify transaction on the backend
           const verifyResponse = await fetch("/api/paystack/verify", {
@@ -109,6 +110,7 @@ export default function GivePageClient() {
           setPaymentStatus("Payment cancelled.");
           setIsLoading(false);
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error: any) => {
           setPaymentStatus(`Payment error: ${error.message || "Unknown error"}`);
           setIsLoading(false);
@@ -116,6 +118,7 @@ export default function GivePageClient() {
       });
     } catch (error) {
       setPaymentStatus("An error occurred. Please try again.");
+      console.log("Error handling payment: ", error);
       setIsLoading(false);
     }
   };
@@ -142,7 +145,7 @@ export default function GivePageClient() {
                 Your Generosity Makes a Difference
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Your faithful giving supports our church's ministries, outreach efforts, and helps us share the love of Christ with our community and beyond.
+                Your faithful giving supports our church&apos;s ministries, outreach efforts, and helps us share the love of Christ with our community and beyond.
               </p>
             </div>
 
@@ -295,7 +298,7 @@ export default function GivePageClient() {
                   <CardHeader>
                     <CardTitle>Set Up Recurring Giving</CardTitle>
                     <CardDescription>
-                      Schedule automatic donations to support the church's ongoing ministries via Paystack.
+                      Schedule automatic donations to support the church&apos;s ongoing ministries via Paystack.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -446,7 +449,7 @@ export default function GivePageClient() {
               </CardHeader>
               <CardContent>
                 <p className="text-center text-muted-foreground">
-                  Your gifts support our children's, youth, adult, and senior ministries, helping people of all ages grow in their faith.
+                  Your gifts support our children&apos;s, youth, adult, and senior ministries, helping people of all ages grow in their faith.
                 </p>
               </CardContent>
             </Card>
@@ -502,7 +505,7 @@ export default function GivePageClient() {
               </CardHeader>
               <CardContent>
                 <p className="text-center text-muted-foreground">
-                  Your giving supports missionaries and humanitarian efforts around the world, sharing God's love with those in need.
+                  Your giving supports missionaries and humanitarian efforts around the world, sharing God&apos;s love with those in need.
                 </p>
               </CardContent>
             </Card>
@@ -577,7 +580,7 @@ export default function GivePageClient() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Your donations support our church's ministries, outreach programs, missions, staff salaries, building maintenance, and operational expenses. We are committed to financial transparency and good stewardship.
+                    Your donations support our church&apos;s ministries, outreach programs, missions, staff salaries, building maintenance, and operational expenses. We are committed to financial transparency and good stewardship.
                   </p>
                 </CardContent>
               </Card>

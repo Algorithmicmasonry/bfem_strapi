@@ -1,6 +1,5 @@
 import SermonsPageClient from '@/components/sermons-client';
-import React from 'react';
-import { StrapiSermonsResponse, SermonData } from '@/types/sermon'; // Use the revised types
+import { SermonData } from '@/types/sermon'; // Use the revised types
 import { Loader2 } from 'lucide-react';
 
 async function getSermons(): Promise<SermonData[]> {
@@ -30,7 +29,7 @@ async function getSermons(): Promise<SermonData[]> {
 
 const SermonsPage = async () => {
   const sermons = await getSermons();
-  console.log("This is the sermons data from the codebase: ", sermons); // This log will now show the correct flat structure
+  // This log will now show the correct flat structure
 
   // Sort sermons by date, newest first
   const sortedSermons = sermons.sort((a, b) => {

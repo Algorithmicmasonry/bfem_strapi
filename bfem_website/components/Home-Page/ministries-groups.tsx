@@ -216,7 +216,7 @@ const MinistriesGroups = () => {
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
               Contact us to learn more about our ministries and find the perfect
-              group for your spiritual journey. We're here to help you connect
+              group for your spiritual journey. We&apos;re here to help you connect
               and grow in faith.
             </p>
 

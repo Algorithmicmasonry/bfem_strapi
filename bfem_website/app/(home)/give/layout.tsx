@@ -1,7 +1,6 @@
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "@/app/globals.css";
-import { Footer, Navbar } from "@/components/Home-Page";
 
 export const metadata: Metadata = {
   title: " Give to Bible Faith Evangelical Ministries",

@@ -7,8 +7,42 @@ const ImageGalleryPage = async () => {
   const data = await fetchStrapiImages();
   const galleryData = data.data;
 
+  type GalleryItem = {
+  id: string;
+  documentId: string;
+  title: string;
+  category?: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  image: {
+    id: string;
+    documentId: string;
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    width: number;
+    height: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    formats: any; // <- we can improve this too later
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: string;
+    provider: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    provider_metadata?: any;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+  };
+};
+
+
   // Transform Strapi data to match the client component's expected format
-  const images: Image[] = galleryData.map((item: any) => ({
+  const images: Image[] = galleryData.map((item: GalleryItem) => ({
     id: item.id,
     documentId: item.documentId,
     title: item.title,

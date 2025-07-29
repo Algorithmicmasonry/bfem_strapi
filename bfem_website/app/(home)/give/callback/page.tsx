@@ -1,6 +1,9 @@
-import { redirect } from "next/navigation";
+import React from 'react'
 
-export default function CallbackPage({ searchParams }: { searchParams: { reference: string } }) {
-  // Redirect to the give page with a success message or handle verification
-  redirect(`/give?reference=${searchParams.reference}`);
+const GiveCallbackPage = () => {
+  return (
+    <div>GiveCallbackPage</div>
+  )
 }
+
+export default GiveCallbackPage

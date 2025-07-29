@@ -12,7 +12,6 @@ import {
 export default async function HomePage() {
 
   const res = await getStrapiHomePageData("/api/home-page");
-  console.log("This is the response from strapi: ", res);
   const strapiData = res.data;
  
   return (

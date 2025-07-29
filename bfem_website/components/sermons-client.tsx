@@ -220,7 +220,7 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
 export default function SermonsPageClient({
   data: sermons,
 }: SermonsPageClientProps) {
-  console.log("Sermons data received in client:", sermons); // For debugging
+ // For debugging
 
   // Use optional chaining and filter Boolean for robustness
   const uniqueSeries = Array.from(
