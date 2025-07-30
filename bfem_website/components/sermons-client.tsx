@@ -124,17 +124,15 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
     : "/placeholder.svg";
 
   const audioUrl = sermon.audioFile
-    ? `${strapiBaseUrl}${sermon.audioFile.url}`
+    ? `${sermon.audioFile.url}`
     : null;
 
   const documentUrl = sermon.documentFile
-    ? `${strapiBaseUrl}${sermon.documentFile.url}`
+    ? `${sermon.documentFile.url}`
     : null;
 
   const videoId = sermon.videoId;
-  const watchNowLink = videoId
-    ? `https://www.youtube.com/watch?v=${videoId}`
-    : `/sermons/${sermon.id}`; // Correct YouTube URL
+ 
 
   return (
     <Card key={sermon.id}>
@@ -178,17 +176,6 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
           </div>
           <p className="text-muted-foreground mb-4">{sermon.description}</p>
           <div className="flex flex-wrap gap-3">
-            <Link href={watchNowLink}>
-              <Button>
-                {videoId ? (
-                  <>
-                    <PlayCircle className="h-4 w-4 mr-2" /> Watch Now
-                  </>
-                ) : (
-                  "Details"
-                )}
-              </Button>
-            </Link>
             {audioUrl && (
               <a href={audioUrl} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline">
