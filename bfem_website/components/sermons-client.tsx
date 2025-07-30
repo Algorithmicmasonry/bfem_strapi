@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -20,23 +17,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SermonData } from "@/types/sermon"; // Import the revised SermonData interface
 import {
   CalendarDays,
   Clock,
   Download,
   Headphones,
   Search,
-  Users,
-  PlayCircle,
+  Users
 } from "lucide-react";
-import { SermonData } from "@/types/sermon"; // Import the revised SermonData interface
+import Image from "next/image";
 
 interface SermonsPageClientProps {
   data: SermonData[];
 }
 
 function SermonCard({ sermon }: { sermon: SermonData }) {
-  const strapiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "";
+
 
   // Access fields directly on sermon object, not through attributes or data wrappers
   const imageUrl = sermon.coverImage
@@ -51,7 +49,7 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
     ? `${sermon.documentFile.url}`
     : null;
 
-  const videoId = sermon.videoId;
+ 
  
 
   return (
