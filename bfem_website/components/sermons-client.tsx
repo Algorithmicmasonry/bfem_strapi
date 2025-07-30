@@ -44,17 +44,15 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
     : "/placeholder.svg"; // Fallback image
 
   const audioUrl = sermon.audioFile
-    ? `${strapiBaseUrl}${sermon.audioFile.url}`
+    ? `${sermon.audioFile.url}`
     : null;
 
   const documentUrl = sermon.documentFile
-    ? `${strapiBaseUrl}${sermon.documentFile.url}`
+    ? `${sermon.documentFile.url}`
     : null;
 
   const videoId = sermon.videoId;
-  const watchNowLink = videoId
-    ? `https://www.youtube.com/watch?v=${videoId}`
-    : `/sermons/${sermon.id}`; // Correct YouTube URL
+ 
 
   return (
     <Card key={sermon.id}>
@@ -97,11 +95,6 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
         </p>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Link href={watchNowLink}>
-          <Button variant="outline" size="sm">
-            {videoId ? "Watch Now" : "Details"}
-          </Button>
-        </Link>
         <div className="flex gap-2">
           {audioUrl && (
             <a href={audioUrl} target="_blank" rel="noopener noreferrer">
