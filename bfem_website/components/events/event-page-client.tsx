@@ -81,7 +81,7 @@ export default function EventsPageClient({ data }: EventsPageClientProps) {
             Events & Calendar
           </h1>
           <p className="text-xl max-w-3xl mx-auto">
-            Stay connected with what&pos;s happening at BFEM church
+            Stay connected with what&apos;s happening at BFEM church
           </p>
         </div>
       </section>
@@ -164,14 +164,13 @@ export default function EventsPageClient({ data }: EventsPageClientProps) {
                           // Correctly access image URL and prepend base URL
                           src={
                             event.image
-                              ? `${
-                                  process.env.NEXT_PUBLIC_STRAPI_API_URL || ""
-                                }${event.image.url}`
+                              ? `${event.image.url}`
                               : "/placeholder.svg"
                           }
                           // Use alternative text or fallback to title
                           alt={event.image?.alternativeText || event.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
                           className="object-cover rounded-t-lg"
                         />
                         <div className="absolute top-2 left-2">

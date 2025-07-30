@@ -40,7 +40,7 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
 
   // Access fields directly on sermon object, not through attributes or data wrappers
   const imageUrl = sermon.coverImage
-    ? `${strapiBaseUrl}${sermon.coverImage.url}`
+    ? `${sermon.coverImage.url}`
     : "/placeholder.svg"; // Fallback image
 
   const audioUrl = sermon.audioFile
@@ -127,7 +127,7 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
   const strapiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "";
 
   const imageUrl = sermon.coverImage
-    ? `${strapiBaseUrl}${sermon.coverImage.url}`
+    ? `${sermon.coverImage.url}`
     : "/placeholder.svg";
 
   const audioUrl = sermon.audioFile

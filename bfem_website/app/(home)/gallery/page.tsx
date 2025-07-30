@@ -63,9 +63,7 @@ const ImageGalleryPage = async () => {
       ext: item.image.ext,
       mime: item.image.mime,
       size: item.image.size,
-      url: `${
-        process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
-      }${item.image.url}`,
+      url: item.image.url,
       previewUrl: item.image.previewUrl,
       provider: item.image.provider,
       provider_metadata: item.image.provider_metadata,
