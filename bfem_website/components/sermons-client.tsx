@@ -115,7 +115,7 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
 }
 
 function SermonListItem({ sermon }: { sermon: SermonData }) {
-  const strapiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "";
+ 
 
   const imageUrl = sermon.coverImage
     ? `${sermon.coverImage.url}`
@@ -129,7 +129,7 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
     ? `${sermon.documentFile.url}`
     : null;
 
-  const videoId = sermon.videoId;
+
  
 
   return (
