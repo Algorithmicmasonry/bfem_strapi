@@ -69,7 +69,7 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-        <Link href="/login">
+        <Link href="https://decisive-renewal-78ed8a1925.strapiapp.com/admin/auth/login">
           <Button
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-primary-foreground text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-foreground hover:text-primary hover:border-2 transition-colors"
             onClick={handleRouting}

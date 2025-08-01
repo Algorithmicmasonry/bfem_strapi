@@ -2,6 +2,8 @@ import { getStrapiHomePageData } from "@/actions/getHomePageData";
 import { AboutUs, Branches, Events, HeroSection, MinistriesGroups, PastorAbout, Sermon } from "@/components/Home-Page";
 import { SermonData } from "@/types/sermon";
 
+export const dynamic = 'force-dynamic';
+
 // Reuse the getSermons function from SermonsPage
 async function getSermons(): Promise<SermonData[]> {
   const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;

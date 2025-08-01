@@ -3,6 +3,8 @@ import { fetchStrapiImages } from "@/actions/fetchStrapiGallery";
 import ChurchGalleryClient from "@/components/image-gallery-client";
 import { Image } from "@/types/gallery"; // Import the Image type
 
+export const dynamic = 'force-dynamic';
+
 const ImageGalleryPage = async () => {
   const data = await fetchStrapiImages();
   const galleryData = data.data;

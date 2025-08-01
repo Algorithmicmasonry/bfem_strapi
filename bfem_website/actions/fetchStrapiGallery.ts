@@ -5,7 +5,9 @@ export const fetchStrapiImages = async () => {
 
   const strapiApiEndpoint = "/api/gallery-images?populate=image"
   try {
-    const response = await fetch(`${baseUrl}${strapiApiEndpoint}`)
+    const response = await fetch(`${baseUrl}${strapiApiEndpoint}`, {
+      cache: 'no-store'
+    })
     const data = await response.json();
     console.log("This is the data returned from the strapi gallery: ", data)
     return data;

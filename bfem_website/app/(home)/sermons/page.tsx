@@ -2,6 +2,8 @@ import SermonsPageClient from '@/components/sermons-client';
 import { SermonData } from '@/types/sermon'; // Use the revised types
 import { Loader2 } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 async function getSermons(): Promise<SermonData[]> {
   const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
@@ -13,7 +15,9 @@ async function getSermons(): Promise<SermonData[]> {
 
 
   // Ensure ?populate=* is present here!
-  const res = await fetch(`${apiUrl}/api/sermons?populate=*`)
+  const res = await fetch(`${apiUrl}/api/sermons?populate=*`, {
+    cache: 'no-store'
+  })
 
 
 
