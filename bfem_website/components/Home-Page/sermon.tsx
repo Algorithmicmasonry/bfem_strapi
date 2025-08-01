@@ -36,7 +36,7 @@ const Sermon = ({ sermon }: SermonProps) => {
   // Construct link to sermon page or YouTube video
   const sermonLink = sermon.videoId
     ? `https://www.youtube.com/watch?v=${sermon.videoId}`
-    : `/sermons/${sermon.id}`;
+    : `/sermons`;
 
   return (
     <div className="my-[20px]">
