@@ -13,7 +13,7 @@ const Events = () => {
               className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex flex-col"
               style={{
                 backgroundImage:
-                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCtf49Nl9fZP-PewdFn_4CfIkJfU-2YUmFpjTkIM6xozr7d45CDiKY7AAY2z2fGSDf3Nio7dPYzbOAPoDeEf7qW3Gc3ZdxwNqcvqJDraOQ1_wn9hz002Al5Bsd_lkJ06MC6U9usWQkgZAZ0sfLRVqkdVDnEdJWvfDtq_LedlKk9zh1Tv_Zk5QOi-Rbb7Epvmf6_Rr2zd-ouStKNtHE7JwiECrDnVSy4LomckcY5e70J0_Q-CGh0b2JQEkek8G29UaEQAF8U0t2RWyA")',
+                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFfzt7SIYGc4aDKKk4wRyPhhcJXeQZ_KvxVnbYx8gO-05TSdZ1zOGF_8y8OdaXFmHkC7G29IJLEU10HVg9PImxZXNRdJXP5kqjgdwXUuZ9vTabaTzy6K7bpSQxH8xZLaryplhi1fT7QjJInjgom4l_XnpcAhteDDuFlHg0ZXSKBWvI-STvN9HfpiFOTMkDt-KIfKIWT8UZJKUAOK_p9ge_20OA54KnDx0AeHavPkNfLBA5CfNyLyL11z4PTlLOW7Rf3aKcvznBiQM")',
               }}
             ></div>
             <div>
@@ -30,7 +30,7 @@ const Events = () => {
               className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex flex-col"
               style={{
                 backgroundImage:
-                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKLed3kEQZ8DvfpvWDiP_kGYip21exYaZ2JtXMMcb27tVS9HZc5uojJpwY756a8-k9agjpjzBL3b4gVEBOt6JgOsCHlSIMVnRb0FeA_W1RID9-DN8n_4y2KMDw5iKK1asRa8reycEqgsggXXxyukKYkMgfq1UKI9Clg4l2F-vn8hSgYsfvPMv2rfwTVNkK97ftMM5sMDSz5ZH_QmbSVlZffgJ3nucOpkKd3Td6tzFtJeu9_jafz_026vdn2xFqPh91kLkKZHLdfdM")',
+                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFfzt7SIYGc4aDKKk4wRyPhhcJXeQZ_KvxVnbYx8gO-05TSdZ1zOGF_8y8OdaXFmHkC7G29IJLEU10HVg9PImxZXNRdJXP5kqjgdwXUuZ9vTabaTzy6K7bpSQxH8xZLaryplhi1fT7QjJInjgom4l_XnpcAhteDDuFlHg0ZXSKBWvI-STvN9HfpiFOTMkDt-KIfKIWT8UZJKUAOK_p9ge_20OA54KnDx0AeHavPkNfLBA5CfNyLyL11z4PTlLOW7Rf3aKcvznBiQM")',
               }}
             ></div>
             <div>
