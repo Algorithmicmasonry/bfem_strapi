@@ -26,10 +26,7 @@ const Navbar = () => {
     setIsClient(true);
   }, []);
 
-  const handleRouting = () => {
-    setIsLoading(true);
-    router.push("/admin");
-  };
+
   return (
     <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4f2f1] p-6 shadow-sm">
       {isClient && (
@@ -72,7 +69,6 @@ const Navbar = () => {
         <Link href="https://decisive-renewal-78ed8a1925.strapiapp.com/admin/auth/login">
           <Button
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-primary-foreground text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-foreground hover:text-primary hover:border-2 transition-colors"
-            onClick={handleRouting}
           >
             <span className="truncate">Sign In</span>
           </Button>
