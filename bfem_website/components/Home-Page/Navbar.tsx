@@ -18,14 +18,11 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const pathName = usePathname();
   const [isClient, setIsClient] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     // This ensures we're on the client
     setIsClient(true);
   }, []);
-
 
   return (
     <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4f2f1] p-6 shadow-sm">
@@ -67,9 +64,7 @@ const Navbar = () => {
           ))}
         </div>
         <Link href="https://decisive-renewal-78ed8a1925.strapiapp.com/admin/auth/login">
-          <Button
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-primary-foreground text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-foreground hover:text-primary hover:border-2 transition-colors"
-          >
+          <Button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-primary-foreground text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-foreground hover:text-primary hover:border-2 transition-colors">
             <span className="truncate">Sign In</span>
           </Button>
         </Link>
@@ -169,13 +164,7 @@ const Navbar = () => {
                   target="_blank"
                 >
                   <Button className="w-full flex items-center justify-center rounded-xl h-12 px-4 bg-[#e8cbb4] text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d4b89a] transition-colors">
-                    <span className="truncate">
-                      {isLoading ? (
-                        <Loader2 className="animate-spin" />
-                      ) : (
-                        "Sign In"
-                      )}
-                    </span>
+                    <span className="truncate">Sign In</span>
                   </Button>
                 </Link>
               </div>
