@@ -114,9 +114,7 @@ export default function EventsPageClient({ data }: EventsPageClientProps) {
                           // Correctly access image URL and prepend base URL
                           src={
                             event.image
-                              ? `${
-                                  process.env.NEXT_PUBLIC_STRAPI_API_URL || ""
-                                }${event.image.url}`
+                              ? `${event.image.url}`
                               : "/placeholder.svg"
                           }
                           // Use alternative text or fallback to title
