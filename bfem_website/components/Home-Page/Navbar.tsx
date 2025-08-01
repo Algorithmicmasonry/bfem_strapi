@@ -168,7 +168,10 @@ const Navbar = () => {
               </nav>
 
               <div className="pt-4 border-t border-[#f4f2f1]">
-                <Link href="/login">
+                <Link
+                  href="https://decisive-renewal-78ed8a1925.strapiapp.com/admin"
+                  target="_blank"
+                >
                   <Button className="w-full flex items-center justify-center rounded-xl h-12 px-4 bg-[#e8cbb4] text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d4b89a] transition-colors">
                     <span className="truncate">
                       {isLoading ? (
