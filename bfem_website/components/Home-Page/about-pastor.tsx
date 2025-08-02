@@ -23,7 +23,7 @@ const PastorAbout = () => {
                 <div className="relative">
                   <div className="w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[400px] bg-muted rounded-lg shadow-md overflow-hidden border">
                     <Image
-                      src="/pastor olanusi three.jpg"
+                      src="/pastor olanusi five.jpg"
                       alt="Pastor Tolulope Abiodun Olanusi"
                       className="w-full h-full object-cover"
                       width="100"

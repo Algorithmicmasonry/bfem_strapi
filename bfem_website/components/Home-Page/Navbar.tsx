@@ -31,7 +31,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4 text-primary">
             {/* Church Logo SVG */}
             <Image
-              src="/Bfem logo.jpg"
+              src="/bfem logo 2.jpg"
               width={100}
               height={100}
               alt="church logo"
