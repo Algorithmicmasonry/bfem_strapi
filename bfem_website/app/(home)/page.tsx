@@ -1,10 +1,20 @@
 import { getStrapiHomePageData } from "@/actions/getHomePageData";
-import { AboutUs, Branches, Events, HeroSection, MinistriesGroups, PastorAbout, Sermon } from "@/components/Home-Page";
+import { getPrayerGroups } from "@/actions/getPrayerGroups";
+import {
+  AboutUs,
+  Branches,
+  Events,
+  HeroSection,
+  MinistriesGroups,
+  PastorAbout,
+  Sermon,
+} from "@/components/Home-Page";
 import { SermonData } from "@/types/sermon";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // Reuse the getSermons function from SermonsPage
+
 async function getSermons(): Promise<SermonData[]> {
   const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
@@ -28,6 +38,10 @@ export default async function HomePage() {
   // Fetch homepage data
   const res = await getStrapiHomePageData("/api/home-page");
   const strapiData = res.data;
+
+  // fetch prayer groups
+  const prayerGroups = await getPrayerGroups();
+  console.log("Prayer Groups: ", prayerGroups);
 
   // Fetch sermons and get the latest one
   const sermons = await getSermons();

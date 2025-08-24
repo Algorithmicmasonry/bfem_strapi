@@ -1,87 +1,24 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getConventions, getPrayerGroups } from "@/actions/getPrayerGroups";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { phoneNumberWithoutFormatting } from "@/constants";
+import { Convention } from "@/types/conventions";
+import { PrayerGroup } from "@/types/prayerGroups";
 import {
-  Users,
-  Heart,
-  Shield,
   Flame,
+  House,
   Mail,
-  Phone,
   MessageSquareMore,
+  Phone
 } from "lucide-react";
 import Link from "next/link";
-import { phoneNumberWithoutFormatting } from "@/constants";
 
-const MinistriesGroups = () => {
-  const conventions = [
-    {
-      id: 1,
-      title: "Women Convention",
-      icon: Heart,
-      description:
-        "A powerful gathering of women in faith, focusing on spiritual growth, fellowship, and empowerment through God's word. Join us for inspiring teachings, worship, and sisterhood in Christ.",
-      activities: [
-        "Bible Study",
-        "Prayer & Worship",
-        "Fellowship",
-        "Spiritual Mentorship",
-      ],
-      meetingTime: "Monthly - First Saturday",
-    },
-    {
-      id: 2,
-      title: "Men's Convention",
-      icon: Shield,
-      description:
-        "A dynamic fellowship for men to grow in faith, leadership, and brotherhood. Experience powerful teachings that strengthen your walk with God and your role as a spiritual leader.",
-      activities: [
-        "Leadership Training",
-        "Men's Bible Study",
-        "Prayer Warriors",
-        "Community Outreach",
-      ],
-      meetingTime: "Monthly - Second Saturday",
-    },
-  ];
+export const dynamic = "force-dynamic";
 
-  const prayerGroups = [
-    {
-      id: 1,
-      name: "Elijah Prayer Group",
-      icon: Flame,
-      description:
-        "Named after the mighty prophet Elijah, this group focuses on fervent prayer and spiritual warfare. Experience the power of persistent prayer and witness God's miraculous interventions.",
-      focus: "Spiritual Warfare & Breakthrough",
-      meetingTime: "Wednesdays 6:00 PM",
-    },
-    {
-      id: 2,
-      name: "Emmanuel Prayer Group",
-      icon: Heart,
-      description:
-        "Emmanuel means 'God with us.' This group emphasizes intimate fellowship with God through prayer, worship, and meditation on His presence in our daily lives.",
-      focus: "Intimate Worship & Fellowship",
-      meetingTime: "Fridays 7:00 PM",
-    },
-    {
-      id: 3,
-      name: "Deborah Prayer Group",
-      icon: Users,
-      description:
-        "Inspired by the prophetess and judge Deborah, this group focuses on prophetic prayer, intercession for the nation, and raising up spiritual leaders in the body of Christ.",
-      focus: "Prophetic Prayer & Intercession",
-      meetingTime: "Sundays 5:00 PM",
-    },
-    {
-      id: 4,
-      name: "Pentecost Prayer Group",
-      icon: Flame,
-      description:
-        "Celebrating the power of Pentecost, this group emphasizes prayer in the Holy Spirit, spiritual gifts, and experiencing the fullness of God's power in prayer and ministry.",
-      focus: "Holy Spirit Power & Gifts",
-      meetingTime: "Saturdays 8:00 AM",
-    },
-  ];
+const MinistriesGroups = async () => {
+  const prayerGroups: PrayerGroup[] = await getPrayerGroups();
+  const conventions: Convention[] = await getConventions();
+  console.log("Conventions: ", conventions);
 
   return (
     <div className="my-[20px]" id="ministries">
@@ -106,30 +43,29 @@ const MinistriesGroups = () => {
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {conventions.map((convention) => {
-              const IconComponent = convention.icon;
               return (
                 <Card
-                  key={convention.id}
+                  key={convention.documentId}
                   className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
                 >
                   <CardHeader className="bg-primary text-primary-foreground">
                     <div className="flex items-center gap-4">
                       <div className="bg-primary-foreground/20 p-3 rounded-full">
-                        <IconComponent className="h-8 w-8" />
+                        <House className="h-8 w-8" />
                       </div>
                       <div>
                         <CardTitle className="text-xl sm:text-2xl py-4">
-                          {convention.title}
+                          {convention.name}
                         </CardTitle>
                         <p className="text-primary-foreground/80 text-sm">
-                          {convention.meetingTime}
+                          {String(convention.date)}
                         </p>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="p-6">
                     <p className="text-foreground mb-6 leading-relaxed">
-                      {convention.description}
+                      {convention.info}
                     </p>
 
                     <div className="mb-6">
@@ -137,11 +73,11 @@ const MinistriesGroups = () => {
                         Activities Include:
                       </h4>
                       <div className="grid grid-cols-2 gap-2">
-                        {convention.activities.map((activity, index) => (
+                        {convention.activity.map((activity, index) => (
                           <div key={index} className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-primary rounded-full"></div>
                             <span className="text-sm text-muted-foreground">
-                              {activity}
+                              {activity.activityName}
                             </span>
                           </div>
                         ))}
@@ -165,15 +101,14 @@ const MinistriesGroups = () => {
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {prayerGroups.map((group) => {
-              const IconComponent = group.icon;
               return (
                 <Card
-                  key={group.id}
+                  key={group.documentId}
                   className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <CardHeader className="bg-muted text-center p-4">
                     <div className="mx-auto bg-primary p-4 rounded-full w-fit mb-4">
-                      <IconComponent className="h-8 w-8 text-primary-foreground" />
+                      <Flame className="h-8 w-8 text-primary-foreground" />
                     </div>
                     <CardTitle className="text-lg font-bold text-foreground">
                       {group.name}
@@ -189,18 +124,24 @@ const MinistriesGroups = () => {
                           Focus Area:
                         </p>
                         <p className="text-sm text-accent-foreground">
-                          {group.focus}
+                          {group.focusArea}
                         </p>
                       </div>
                     </div>
 
                     <p className="text-foreground text-sm leading-relaxed mb-6">
-                      {group.description}
+                      {group.info}
                     </p>
 
-                    <Button variant="outline" className="w-full">
-                      Join Group
-                    </Button>
+                    <Link
+                      href={group.groupLink ? group.groupLink : "#"}
+                      target="_blank"
+                      className="w-full"
+                    >
+                      <Button variant="outline" className="w-full">
+                        Join Group
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               );
@@ -216,8 +157,8 @@ const MinistriesGroups = () => {
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
               Contact us to learn more about our ministries and find the perfect
-              group for your spiritual journey. We&apos;re here to help you connect
-              and grow in faith.
+              group for your spiritual journey. We&apos;re here to help you
+              connect and grow in faith.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6 max-w-md mx-auto">
