@@ -373,6 +373,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConventionConvention extends Struct.CollectionTypeSchema {
+  collectionName: 'conventions';
+  info: {
+    displayName: 'convention';
+    pluralName: 'conventions';
+    singularName: 'convention';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    activity: Schema.Attribute.Component<'name.activity', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Text;
+    info: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::convention.convention'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   collectionName: 'events';
   info: {
@@ -486,6 +517,38 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     Motto: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPrayerGroupPrayerGroup extends Struct.CollectionTypeSchema {
+  collectionName: 'prayer_groups';
+  info: {
+    displayName: 'Prayer Group';
+    pluralName: 'prayer-groups';
+    singularName: 'prayer-group';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    focusArea: Schema.Attribute.Text;
+    groupLink: Schema.Attribute.String;
+    info: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::prayer-group.prayer-group'
+    > &
+      Schema.Attribute.Private;
+    meetingTime: Schema.Attribute.Text;
+    name: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1043,10 +1106,12 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::convention.convention': ApiConventionConvention;
       'api::event.event': ApiEventEvent;
       'api::events-page.events-page': ApiEventsPageEventsPage;
       'api::gallery-image.gallery-image': ApiGalleryImageGalleryImage;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::prayer-group.prayer-group': ApiPrayerGroupPrayerGroup;
       'api::sermon.sermon': ApiSermonSermon;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

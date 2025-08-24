@@ -1,0 +1,13 @@
+{
+    "collectionName": "components_name_activities",
+    "info": {
+        "displayName": "activity"
+    },
+    "options": {},
+    "attributes": {
+        "activityName": {
+            "type": "text"
+        }
+    },
+    "config": {}
+}

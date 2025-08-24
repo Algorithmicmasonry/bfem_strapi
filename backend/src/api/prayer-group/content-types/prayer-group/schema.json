@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prayer_groups",
+  "info": {
+    "singularName": "prayer-group",
+    "pluralName": "prayer-groups",
+    "displayName": "Prayer Group"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "meetingTime": {
+      "type": "text"
+    },
+    "focusArea": {
+      "type": "text"
+    },
+    "info": {
+      "type": "text"
+    },
+    "groupLink": {
+      "type": "string"
+    }
+  }
+}
