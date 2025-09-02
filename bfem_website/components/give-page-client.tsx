@@ -240,7 +240,7 @@ export default function GivePageClient() {
                       >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="general" id="general" />
-                          <Label htmlFor="general">tithe</Label>
+                          <Label htmlFor="general">Tithe</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="missions" id="missions" />
@@ -395,7 +395,7 @@ export default function GivePageClient() {
                             id="recurring-general"
                           />
                           <Label htmlFor="recurring-general">
-                            General Fund
+                            Tithe
                           </Label>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -403,7 +403,7 @@ export default function GivePageClient() {
                             value="missions"
                             id="recurring-missions"
                           />
-                          <Label htmlFor="recurring-missions">Missions</Label>
+                          <Label htmlFor="recurring-missions">Offering</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem
@@ -411,7 +411,7 @@ export default function GivePageClient() {
                             id="recurring-building"
                           />
                           <Label htmlFor="recurring-building">
-                            Building Fund
+                            Missionary Fund
                           </Label>
                         </div>
                       </RadioGroup>
