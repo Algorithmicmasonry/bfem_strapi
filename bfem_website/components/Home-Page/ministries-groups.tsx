@@ -37,12 +37,12 @@ const MinistriesGroups = async () => {
         </div>
 
         {/* Conventions Section */}
-        <section className="mb-16">
+       { conventions.length > 0 && <section className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 text-center">
             Conventions
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {conventions.map((convention) => {
+            {  conventions.map((convention) => {
               return (
                 <Card
                   key={convention.documentId}
@@ -92,10 +92,10 @@ const MinistriesGroups = async () => {
               );
             })}
           </div>
-        </section>
+        </section>}
 
         {/* Prayer Groups Section */}
-        <section className="mb-16">
+        { prayerGroups.length > 0 && <section className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 text-center">
             Prayer Groups
           </h2>
@@ -147,7 +147,7 @@ const MinistriesGroups = async () => {
               );
             })}
           </div>
-        </section>
+        </section>}
 
         {/* Contact Section */}
         <section className="bg-secondary rounded-lg p-6 sm:p-8">
