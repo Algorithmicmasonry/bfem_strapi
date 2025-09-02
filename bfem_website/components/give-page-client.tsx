@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react"; // Import useEffect
 // import PaystackPop from "@paystack/inline-js"; // Remove this direct import
@@ -33,12 +33,15 @@ export default function GivePageClient() {
   const [email, setEmail] = useState<string>("");
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [PaystackPop, setPaystackPop] = useState<null | typeof import("@paystack/inline-js")>(null);
+  const [PaystackPop, setPaystackPop] = useState<
+    null | typeof import("@paystack/inline-js")
+  >(null);
 
   useEffect(() => {
     // Dynamically import PaystackPop only on the client-side
     async function loadPaystack() {
-      if (typeof window !== "undefined") { // Double-check if window is defined (extra caution)
+      if (typeof window !== "undefined") {
+        // Double-check if window is defined (extra caution)
         const myModule = await import("@paystack/inline-js");
         setPaystackPop(() => myModule.default); // Assuming it's a default export
       }
@@ -98,11 +101,15 @@ export default function GivePageClient() {
             body: JSON.stringify({ reference: transaction.reference }),
           });
           const verifyData = await verifyResponse.json();
-        
-          if (verifyData.status  === "success") {
-            setPaymentStatus("Payment successful! Thank you for your donation.");
+
+          if (verifyData.status === "success") {
+            setPaymentStatus(
+              "Payment successful! Thank you for your donation."
+            );
           } else {
-            setPaymentStatus("Payment verification failed. Please contact support.");
+            setPaymentStatus(
+              "Payment verification failed. Please contact support."
+            );
           }
           setIsLoading(false);
         },
@@ -112,7 +119,9 @@ export default function GivePageClient() {
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error: any) => {
-          setPaymentStatus(`Payment error: ${error.message || "Unknown error"}`);
+          setPaymentStatus(
+            `Payment error: ${error.message || "Unknown error"}`
+          );
           setIsLoading(false);
         },
       });
@@ -131,7 +140,8 @@ export default function GivePageClient() {
         <div className="container relative z-10 px-4 text-primary">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Give</h1>
           <p className="text-xl max-w-3xl mx-auto text-black">
-            Support the mission and ministries of BFEM Church through your generous giving
+            Support the mission and ministries of BFEM Church through your
+            generous giving
           </p>
         </div>
       </section>
@@ -145,7 +155,9 @@ export default function GivePageClient() {
                 Your Generosity Makes a Difference
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Your faithful giving supports our church&apos;s ministries, outreach efforts, and helps us share the love of Christ with our community and beyond.
+                Your faithful giving supports our church&apos;s ministries,
+                outreach efforts, and helps us share the love of Christ with our
+                community and beyond.
               </p>
             </div>
 
@@ -180,7 +192,8 @@ export default function GivePageClient() {
                   <CardHeader>
                     <CardTitle>Make a One-Time Gift</CardTitle>
                     <CardDescription>
-                      Your one-time gift will be processed securely through Paystack.
+                      Your one-time gift will be processed securely through
+                      Paystack.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -220,22 +233,22 @@ export default function GivePageClient() {
                     {/* Fund Selection */}
                     <div className="space-y-2">
                       <Label htmlFor="fund">Select Fund</Label>
-                      <RadioGroup value={fund} onValueChange={setFund} defaultValue="general">
+                      <RadioGroup
+                        value={fund}
+                        onValueChange={setFund}
+                        defaultValue="general"
+                      >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="general" id="general" />
-                          <Label htmlFor="general">General Fund</Label>
+                          <Label htmlFor="general">tithe</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="missions" id="missions" />
-                          <Label htmlFor="missions">Missions</Label>
+                          <Label htmlFor="missions">Offering</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="building" id="building" />
-                          <Label htmlFor="building">Building Fund</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="benevolence" id="benevolence" />
-                          <Label htmlFor="benevolence">Benevolence</Label>
+                          <Label htmlFor="building">Missionary Funds</Label>
                         </div>
                       </RadioGroup>
                     </div>
@@ -245,7 +258,9 @@ export default function GivePageClient() {
                       <Label>Payment Method</Label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Button
-                          variant={paymentMethod === "card" ? "default" : "outline"}
+                          variant={
+                            paymentMethod === "card" ? "default" : "outline"
+                          }
                           onClick={() => setPaymentMethod("card")}
                           className="h-20 flex flex-col items-center justify-center"
                         >
@@ -253,7 +268,9 @@ export default function GivePageClient() {
                           <span>Credit/Debit Card</span>
                         </Button>
                         <Button
-                          variant={paymentMethod === "bank" ? "default" : "outline"}
+                          variant={
+                            paymentMethod === "bank" ? "default" : "outline"
+                          }
                           onClick={() => setPaymentMethod("bank")}
                           className="h-20 flex flex-col items-center justify-center"
                         >
@@ -271,11 +288,15 @@ export default function GivePageClient() {
                         onCheckedChange={(checked) => setCoverFee(!!checked)}
                       />
                       <div className="grid gap-1.5 leading-none">
-                        <Label htmlFor="cover-fee" className="text-sm font-normal">
+                        <Label
+                          htmlFor="cover-fee"
+                          className="text-sm font-normal"
+                        >
                           Cover processing fee (3%)
                         </Label>
                         <p className="text-sm text-muted-foreground">
-                          Adding this amount ensures the church receives your full intended donation.
+                          Adding this amount ensures the church receives your
+                          full intended donation.
                         </p>
                       </div>
                     </div>
@@ -286,7 +307,8 @@ export default function GivePageClient() {
                       onClick={() => handlePayment(false)}
                       disabled={isLoading || !email || !amount}
                     >
-                      <Lock className="h-4 w-4 mr-2" /> {isLoading ? "Processing..." : "Continue to Payment"}
+                      <Lock className="h-4 w-4 mr-2" />{" "}
+                      {isLoading ? "Processing..." : "Continue to Payment"}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -298,7 +320,8 @@ export default function GivePageClient() {
                   <CardHeader>
                     <CardTitle>Set Up Recurring Giving</CardTitle>
                     <CardDescription>
-                      Schedule automatic donations to support the church&apos;s ongoing ministries via Paystack.
+                      Schedule automatic donations to support the church&apos;s
+                      ongoing ministries via Paystack.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -338,7 +361,11 @@ export default function GivePageClient() {
                     {/* Frequency Selection */}
                     <div className="space-y-2">
                       <Label>Frequency</Label>
-                      <RadioGroup value={frequency} onValueChange={setFrequency} defaultValue="weekly">
+                      <RadioGroup
+                        value={frequency}
+                        onValueChange={setFrequency}
+                        defaultValue="weekly"
+                      >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="weekly" id="weekly" />
                           <Label htmlFor="weekly">Weekly</Label>
@@ -357,18 +384,35 @@ export default function GivePageClient() {
                     {/* Fund Selection */}
                     <div className="space-y-2">
                       <Label htmlFor="recurring-fund">Select Fund</Label>
-                      <RadioGroup value={fund} onValueChange={setFund} defaultValue="general">
+                      <RadioGroup
+                        value={fund}
+                        onValueChange={setFund}
+                        defaultValue="general"
+                      >
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="general" id="recurring-general" />
-                          <Label htmlFor="recurring-general">General Fund</Label>
+                          <RadioGroupItem
+                            value="general"
+                            id="recurring-general"
+                          />
+                          <Label htmlFor="recurring-general">
+                            General Fund
+                          </Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="missions" id="recurring-missions" />
+                          <RadioGroupItem
+                            value="missions"
+                            id="recurring-missions"
+                          />
                           <Label htmlFor="recurring-missions">Missions</Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="building" id="recurring-building" />
-                          <Label htmlFor="recurring-building">Building Fund</Label>
+                          <RadioGroupItem
+                            value="building"
+                            id="recurring-building"
+                          />
+                          <Label htmlFor="recurring-building">
+                            Building Fund
+                          </Label>
                         </div>
                       </RadioGroup>
                     </div>
@@ -378,7 +422,9 @@ export default function GivePageClient() {
                       <Label>Payment Method</Label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Button
-                          variant={paymentMethod === "card" ? "default" : "outline"}
+                          variant={
+                            paymentMethod === "card" ? "default" : "outline"
+                          }
                           onClick={() => setPaymentMethod("card")}
                           className="h-20 flex flex-col items-center justify-center"
                         >
@@ -386,7 +432,9 @@ export default function GivePageClient() {
                           <span>Credit/Debit Card</span>
                         </Button>
                         <Button
-                          variant={paymentMethod === "bank" ? "default" : "outline"}
+                          variant={
+                            paymentMethod === "bank" ? "default" : "outline"
+                          }
                           onClick={() => setPaymentMethod("bank")}
                           className="h-20 flex flex-col items-center justify-center"
                         >
@@ -404,11 +452,15 @@ export default function GivePageClient() {
                         onCheckedChange={(checked) => setCoverFee(!!checked)}
                       />
                       <div className="grid gap-1.5 leading-none">
-                        <Label htmlFor="recurring-cover-fee" className="text-sm font-normal">
+                        <Label
+                          htmlFor="recurring-cover-fee"
+                          className="text-sm font-normal"
+                        >
                           Cover processing fee (3%)
                         </Label>
                         <p className="text-sm text-muted-foreground">
-                          Adding this amount ensures the church receives your full intended donation.
+                          Adding this amount ensures the church receives your
+                          full intended donation.
                         </p>
                       </div>
                     </div>
@@ -419,7 +471,8 @@ export default function GivePageClient() {
                       onClick={() => handlePayment(true)}
                       disabled={isLoading || !email || !amount}
                     >
-                      <Repeat className="h-4 w-4 mr-2" /> {isLoading ? "Processing..." : "Set Up Recurring Gift"}
+                      <Repeat className="h-4 w-4 mr-2" />{" "}
+                      {isLoading ? "Processing..." : "Set Up Recurring Gift"}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -435,7 +488,8 @@ export default function GivePageClient() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Why We Give</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Your generosity enables us to fulfill our mission and make a difference in our community and beyond.
+              Your generosity enables us to fulfill our mission and make a
+              difference in our community and beyond.
             </p>
           </div>
 
@@ -449,7 +503,9 @@ export default function GivePageClient() {
               </CardHeader>
               <CardContent>
                 <p className="text-center text-muted-foreground">
-                  Your gifts support our children&apos;s, youth, adult, and senior ministries, helping people of all ages grow in their faith.
+                  Your gifts support our children&apos;s, youth, adult, and
+                  senior ministries, helping people of all ages grow in their
+                  faith.
                 </p>
               </CardContent>
             </Card>
@@ -479,7 +535,8 @@ export default function GivePageClient() {
               </CardHeader>
               <CardContent>
                 <p className="text-center text-muted-foreground">
-                  We serve our local community through food pantries, homeless ministries, counseling services, and other outreach programs.
+                  We serve our local community through food pantries, homeless
+                  ministries, counseling services, and other outreach programs.
                 </p>
               </CardContent>
             </Card>
@@ -505,7 +562,8 @@ export default function GivePageClient() {
               </CardHeader>
               <CardContent>
                 <p className="text-center text-muted-foreground">
-                  Your giving supports missionaries and humanitarian efforts around the world, sharing God&apos;s love with those in need.
+                  Your giving supports missionaries and humanitarian efforts
+                  around the world, sharing God&apos;s love with those in need.
                 </p>
               </CardContent>
             </Card>
@@ -528,7 +586,8 @@ export default function GivePageClient() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    You can make a transfer from your bank app or a POS machine to the following account number
+                    You can make a transfer from your bank app or a POS machine
+                    to the following account number
                   </p>
                   <p className="mt-2">
                     2008200453,
@@ -554,7 +613,8 @@ export default function GivePageClient() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    You can give during our Sunday services by placing your gift in the offering boxes located in the sanctuary.
+                    You can give during our Sunday services by placing your gift
+                    in the offering boxes located in the sanctuary.
                   </p>
                 </CardContent>
               </Card>
@@ -580,7 +640,10 @@ export default function GivePageClient() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Your donations support our church&apos;s ministries, outreach programs, missions, staff salaries, building maintenance, and operational expenses. We are committed to financial transparency and good stewardship.
+                    Your donations support our church&apos;s ministries,
+                    outreach programs, missions, staff salaries, building
+                    maintenance, and operational expenses. We are committed to
+                    financial transparency and good stewardship.
                   </p>
                 </CardContent>
               </Card>
@@ -593,7 +656,9 @@ export default function GivePageClient() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Yes, we use Paystack’s industry-standard encryption and security protocols to ensure your financial information is protected. Your information is never stored on our servers.
+                    Yes, we use Paystack’s industry-standard encryption and
+                    security protocols to ensure your financial information is
+                    protected. Your information is never stored on our servers.
                   </p>
                 </CardContent>
               </Card>
@@ -606,7 +671,9 @@ export default function GivePageClient() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Yes, you can designate your gift to a specific fund or ministry by selecting the appropriate option when giving online or by noting it on your check memo line.
+                    Yes, you can designate your gift to a specific fund or
+                    ministry by selecting the appropriate option when giving
+                    online or by noting it on your check memo line.
                   </p>
                 </CardContent>
               </Card>
@@ -621,9 +688,13 @@ export default function GivePageClient() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Questions About Giving?</h2>
             <p className="text-muted-foreground mb-6">
-              Our finance team is happy to help with any questions you may have about donations, tax statements, or other giving-related matters.
+              Our finance team is happy to help with any questions you may have
+              about donations, tax statements, or other giving-related matters.
             </p>
-            <a className="text-base font-normal leading-normal min-w-40" href="mailto:bfem_ministries@yahoo.com">
+            <a
+              className="text-base font-normal leading-normal min-w-40"
+              href="mailto:bfem_ministries@yahoo.com"
+            >
               <Button size="lg">Contact Us</Button>
             </a>
           </div>
