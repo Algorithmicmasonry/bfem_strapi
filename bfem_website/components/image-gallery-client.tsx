@@ -97,18 +97,22 @@ export default function ChurchGalleryClient({ images }: ImageGalleryProps) {
           <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
             {filteredImages.map((image, index) => (
               <div
-                key={image.id}
+                key={image?.id}
                 className="break-inside-avoid group cursor-pointer"
                 onClick={() => openLightbox(image.id)}
               >
                 <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white">
                   <div className="relative">
                     <Image
-                      src={image.image.url || "/placeholder.svg"}
-                      alt={image.image.alternativeText || image.title}
-                      width={image.image.width || 400}
+                      src={image.image?.url ?? "/placeholder.svg"}
+                      alt={
+                        image.image?.alternativeText ??
+                        image.title ??
+                        "Untitled"
+                      }
+                      width={image.image?.width ?? 400}
                       height={
-                        image.image.height ||
+                        image.image?.height ??
                         (index % 3 === 0 ? 600 : index % 3 === 1 ? 400 : 500)
                       }
                       className="w-full h-auto object-cover"
@@ -173,7 +177,10 @@ export default function ChurchGalleryClient({ images }: ImageGalleryProps) {
             <div className="relative max-w-5xl max-h-[90vh] mx-auto">
               <Image
                 src={selectedImageData.image.url || "/placeholder.svg"}
-                alt={selectedImageData.image.alternativeText || selectedImageData.title}
+                alt={
+                  selectedImageData.image.alternativeText ||
+                  selectedImageData.title
+                }
                 width={selectedImageData.image.width}
                 height={selectedImageData.image.height}
                 className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
