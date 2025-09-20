@@ -25,32 +25,24 @@ import {
   Download,
   Headphones,
   Search,
-  Users
+  Users,
 } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 interface SermonsPageClientProps {
   data: SermonData[];
 }
 
 function SermonCard({ sermon }: { sermon: SermonData }) {
-
-
   // Access fields directly on sermon object, not through attributes or data wrappers
   const imageUrl = sermon.coverImage
     ? `${sermon.coverImage.url}`
     : "/placeholder.svg"; // Fallback image
 
-  const audioUrl = sermon.audioFile
-    ? `${sermon.audioFile.url}`
-    : null;
+  const audioUrl = sermon.audioFile ? `${sermon.audioFile.url}` : null;
 
-  const documentUrl = sermon.documentFile
-    ? `${sermon.documentFile.url}`
-    : null;
-
- 
- 
+  const documentUrl = sermon.documentFile ? `${sermon.documentFile.url}` : null;
 
   return (
     <Card key={sermon.id}>
@@ -93,7 +85,7 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
         </p>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <div className="flex gap-2">
+        <div className="flex items-center justify-between gap-2">
           {audioUrl && (
             <a href={audioUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon">
@@ -103,6 +95,7 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
           )}
           {documentUrl && (
             <a href={documentUrl} target="_blank" rel="noopener noreferrer">
+              Download
               <Button variant="ghost" size="icon">
                 <Download className="h-4 w-4" />
               </Button>
@@ -115,22 +108,13 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
 }
 
 function SermonListItem({ sermon }: { sermon: SermonData }) {
- 
-
   const imageUrl = sermon.coverImage
     ? `${sermon.coverImage.url}`
     : "/placeholder.svg";
 
-  const audioUrl = sermon.audioFile
-    ? `${sermon.audioFile.url}`
-    : null;
+  const audioUrl = sermon.audioFile ? `${sermon.audioFile.url}` : null;
 
-  const documentUrl = sermon.documentFile
-    ? `${sermon.documentFile.url}`
-    : null;
-
-
- 
+  const documentUrl = sermon.documentFile ? `${sermon.documentFile.url}` : null;
 
   return (
     <Card key={sermon.id}>
@@ -183,7 +167,7 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
             )}
             {documentUrl && (
               <a href={documentUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline">
+                <Button variant="outline" className="text-black">
                   <Download className="h-4 w-4 mr-2" /> Download Notes
                 </Button>
               </a>
@@ -198,7 +182,16 @@ function SermonListItem({ sermon }: { sermon: SermonData }) {
 export default function SermonsPageClient({
   data: sermons,
 }: SermonsPageClientProps) {
- // For debugging
+  // For debugging
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 6; // Number of sermons per page
+  const totalPages = Math.ceil(sermons.length / pageSize);
+
+  const paginatedSermons = sermons.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   // Use optional chaining and filter Boolean for robustness
   const uniqueSeries = Array.from(
@@ -326,7 +319,7 @@ export default function SermonsPageClient({
             {/* Grid View */}
             <TabsContent value="grid">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                {sermons.map((sermon) => (
+                {paginatedSermons.map((sermon) => (
                   <SermonCard key={sermon.id} sermon={sermon} />
                 ))}
               </div>
@@ -335,7 +328,7 @@ export default function SermonsPageClient({
             {/* List View */}
             <TabsContent value="list">
               <div className="space-y-4 mt-6">
-                {sermons.map((sermon) => (
+                {paginatedSermons.map((sermon) => (
                   <SermonListItem key={sermon.id} sermon={sermon} />
                 ))}
               </div>
@@ -345,7 +338,12 @@ export default function SermonsPageClient({
           {/* Pagination */}
           <div className="flex justify-center mt-8">
             <div className="flex gap-2">
-              <Button variant="outline" size="icon" disabled>
+              <Button
+                variant="outline"
+                size="icon"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -361,16 +359,24 @@ export default function SermonsPageClient({
                   <path d="m15 18-6-6 6-6" />
                 </svg>
               </Button>
-              <Button variant="outline" className="w-10">
-                1
-              </Button>
-              <Button variant="outline" className="w-10">
-                2
-              </Button>
-              <Button variant="outline" className="w-10">
-                3
-              </Button>
-              <Button variant="outline" size="icon">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <Button
+                  key={i + 1}
+                  variant={currentPage === i + 1 ? "default" : "outline"}
+                  className="w-10"
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </Button>
+              ))}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(p + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
