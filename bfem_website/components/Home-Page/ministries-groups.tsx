@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 const MinistriesGroups = async () => {
   const prayerGroups: PrayerGroup[] = await getPrayerGroups();
   const conventions: Convention[] = await getConventions();
-  console.log("Conventions: ", conventions);
+ 
 
   return (
     <div className="my-[20px]" id="ministries">

@@ -23,7 +23,12 @@ async function getSermons(): Promise<SermonData[]> {
     return [];
   }
 
-  const res = await fetch(`${apiUrl}/api/sermons?populate=*`);
+  const res = await fetch(`${apiUrl}/api/sermons?populate=*`, {
+      next: { 
+        tags: ['events', 'all'], // For webhook-based revalidation
+        revalidate: 86400   // Cache for 24 hours (as backup)
+      }
+    });
 
   if (!res.ok) {
     console.error(`Failed to fetch sermons: ${res.statusText}`);

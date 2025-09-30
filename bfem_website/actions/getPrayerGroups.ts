@@ -8,7 +8,10 @@ export async function getPrayerGroups() {
 
   try {
     const res = await fetch(`${apiUrl}/api/prayer-groups?populate=*`, {
-      cache: "no-store"
+      next: { 
+        tags: ['prayergroups'], // For webhook-based revalidation
+        revalidate: 86400   // Cache for 24 hours (as backup)
+      }
     });
 
     if (!res.ok) {
@@ -34,7 +37,10 @@ export async function getConventions() {
 
   try {
     const res = await fetch(`${apiUrl}/api/conventions?populate=*`, {
-      cache: "no-store"
+      next: { 
+        tags: ['conventions', 'all'], // For webhook-based revalidation
+        revalidate: 86400   // Cache for 24 hours (as backup)
+      }
     });
 
     if (!res.ok) {
