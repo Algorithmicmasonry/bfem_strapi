@@ -28,7 +28,8 @@ async function getSermons(): Promise<SermonData[]> {
         tags: ['events', 'all'], // For webhook-based revalidation
         revalidate: 86400   // Cache for 24 hours (as backup)
       }
-    });
+    }).catch(() => null);
+  if (!res) return [];
 
   if (!res.ok) {
     console.error(`Failed to fetch sermons: ${res.statusText}`);
@@ -36,13 +37,18 @@ async function getSermons(): Promise<SermonData[]> {
   }
 
   const response = await res.json();
-  return response.data; // Returns the flat sermon objects
+  return response.data ?? []; // Returns the flat sermon objects
 }
 
 export default async function HomePage() {
   // Fetch homepage data
   const res = await getStrapiHomePageData("/api/home-page");
-  const strapiData = res.data;
+  // If the CMS can't be reached, show the default wording instead of crashing.
+  const strapiData = res?.data ?? {
+    Title: "Welcome to BIBLE FAITH EVANGELICAL MINISTRIES",
+    Motto:
+      "Making disciples of all nations. To passionately proclaim the gospel of Jesus Christ globally, making disciples and building vibrant communities of faith.",
+  };
 
   // fetch prayer groups
   const prayerGroups = await getPrayerGroups();

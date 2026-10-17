@@ -63,7 +63,7 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-        <Link href="https://decisive-renewal-78ed8a1925.strapiapp.com/admin/auth/login">
+        <Link href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/admin/auth/login`}>
           <Button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-primary-foreground text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-foreground hover:text-primary hover:border-2 transition-colors">
             <span className="truncate">Sign In</span>
           </Button>
@@ -160,7 +160,7 @@ const Navbar = () => {
 
               <div className="pt-4 border-t border-[#f4f2f1]">
                 <Link
-                  href="https://decisive-renewal-78ed8a1925.strapiapp.com/admin"
+                  href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/admin`}
                   target="_blank"
                 >
                   <Button className="w-full flex items-center justify-center rounded-xl h-12 px-4 bg-[#e8cbb4] text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d4b89a] transition-colors">

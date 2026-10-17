@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         email,
         amount: adjustedAmount,
         currency: "NGN",
-        callback_url: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/give/callback`,
+        callback_url: `${new URL(request.url).origin}/give/callback`,
         metadata,
       }),
     });
