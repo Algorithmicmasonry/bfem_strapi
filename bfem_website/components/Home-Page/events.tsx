@@ -1,6 +1,7 @@
 import { getStrapiEventsData } from "@/actions/getStrapiEvents";
 import React from "react";
 import { Event } from "@/types/events";
+import { cmsUrl } from "@/lib/utils";
 
 const Events = async () => {
   const res = await getStrapiEventsData("/api/events");
@@ -19,7 +20,7 @@ const Events = async () => {
                 className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex flex-col"
                 style={{
                   backgroundImage:
-                    `url(${event.image?.url || "/default-image.jpg"})`,
+                    `url(${cmsUrl(event.image?.url) || "/default-image.jpg"})`,
                 }}
               ></div>
               <div>

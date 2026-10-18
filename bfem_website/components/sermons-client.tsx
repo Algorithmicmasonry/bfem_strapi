@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { cmsUrl } from "@/lib/utils";
 
 interface SermonsPageClientProps {
   data: SermonData[];
@@ -37,12 +38,12 @@ interface SermonsPageClientProps {
 function SermonCard({ sermon }: { sermon: SermonData }) {
   // Access fields directly on sermon object, not through attributes or data wrappers
   const imageUrl = sermon.coverImage
-    ? `${sermon.coverImage.url}`
+    ? cmsUrl(sermon.coverImage.url)
     : "/placeholder.svg"; // Fallback image
 
-  const audioUrl = sermon.audioFile ? `${sermon.audioFile.url}` : null;
+  const audioUrl = sermon.audioFile ? cmsUrl(sermon.audioFile.url) : null;
 
-  const documentUrl = sermon.documentFile ? `${sermon.documentFile.url}` : null;
+  const documentUrl = sermon.documentFile ? cmsUrl(sermon.documentFile.url) : null;
 
   return (
     <Card key={sermon.id}>
@@ -109,12 +110,12 @@ function SermonCard({ sermon }: { sermon: SermonData }) {
 
 function SermonListItem({ sermon }: { sermon: SermonData }) {
   const imageUrl = sermon.coverImage
-    ? `${sermon.coverImage.url}`
+    ? cmsUrl(sermon.coverImage.url)
     : "/placeholder.svg";
 
-  const audioUrl = sermon.audioFile ? `${sermon.audioFile.url}` : null;
+  const audioUrl = sermon.audioFile ? cmsUrl(sermon.audioFile.url) : null;
 
-  const documentUrl = sermon.documentFile ? `${sermon.documentFile.url}` : null;
+  const documentUrl = sermon.documentFile ? cmsUrl(sermon.documentFile.url) : null;
 
   return (
     <Card key={sermon.id}>

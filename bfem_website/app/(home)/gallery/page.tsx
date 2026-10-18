@@ -2,6 +2,7 @@
 import { fetchStrapiImages } from "@/actions/fetchStrapiGallery";
 import ChurchGalleryClient from "@/components/image-gallery-client";
 import { Image } from "@/types/gallery"; // Import the Image type
+import { cmsUrl } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -65,7 +66,7 @@ const ImageGalleryPage = async () => {
           ext: item.image.ext,
           mime: item.image.mime,
           size: item.image.size,
-          url: item.image.url,
+          url: cmsUrl(item.image.url),
           previewUrl: item.image.previewUrl,
           provider: item.image.provider,
           provider_metadata: item.image.provider_metadata,

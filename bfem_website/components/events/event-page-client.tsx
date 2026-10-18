@@ -11,6 +11,7 @@ import { EventsPageClientProps } from "@/types/events";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { cmsUrl } from "@/lib/utils";
 
 
 
@@ -70,7 +71,7 @@ export default function EventsPageClient({ data }: EventsPageClientProps) {
                           // Correctly access image URL and prepend base URL
                           src={
                             event.image
-                              ? `${event.image.url}`
+                              ? cmsUrl(event.image.url)
                               : "/placeholder.svg"
                           }
                           // Use alternative text or fallback to title
@@ -118,7 +119,7 @@ export default function EventsPageClient({ data }: EventsPageClientProps) {
                           // Correctly access image URL and prepend base URL
                           src={
                             event.image
-                              ? `${event.image.url}`
+                              ? cmsUrl(event.image.url)
                               : "/placeholder.svg"
                           }
                           // Use alternative text or fallback to title
@@ -235,9 +236,7 @@ export default function EventsPageClient({ data }: EventsPageClientProps) {
                         {event.image && (
                           <div className="relative w-full sm:w-1/3 h-32 sm:h-auto overflow-hidden rounded-t-md sm:rounded-l-md sm:rounded-t-none">
                             <Image
-                              src={`${
-                                process.env.NEXT_PUBLIC_STRAPI_API_URL || ""
-                              }${event.image.url}`}
+                              src={cmsUrl(event.image.url)}
                               alt={event.image.alternativeText || event.title}
                               fill
                               className="object-cover"
