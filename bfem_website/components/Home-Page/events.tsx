@@ -6,7 +6,10 @@ import { cmsUrl } from "@/lib/utils";
 const Events = async () => {
   const res = await getStrapiEventsData("/api/events");
   const events = res.data as Event[];
-  const upcomingEvents = events.filter((event) => event.recurring);
+  // One-off events (like the yearly convention) come first, then the regular
+  // recurring ones. Entries with "recurring" left empty stay off the home page.
+  const oneOff = events.filter((event) => event.recurring === false);
+  const upcomingEvents = [...oneOff, ...events.filter((event) => event.recurring)];
   return (
     <div className="mt-[20px]">
       <h2 className="text-primary text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
@@ -24,6 +27,11 @@ const Events = async () => {
                 }}
               ></div>
               <div>
+                {!event.recurring && (
+                  <span className="mb-1 inline-block rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">
+                    Upcoming
+                  </span>
+                )}
                 <p className="text-[#171412] text-base font-medium leading-normal">
                   {event.title}
                 </p>
