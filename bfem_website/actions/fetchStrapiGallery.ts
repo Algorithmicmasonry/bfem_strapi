@@ -8,7 +8,7 @@ export const fetchStrapiImages = async () => {
     const response = await fetch(`${baseUrl}${strapiApiEndpoint}`, {
       next: { 
         tags: ['gallery', 'all'], // For webhook-based revalidation
-        revalidate: 86400   // Cache for 24 hours (as backup)
+        revalidate: 60   // Fresh CMS content within a minute
       }
     })
     

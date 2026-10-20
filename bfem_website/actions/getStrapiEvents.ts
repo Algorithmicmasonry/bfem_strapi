@@ -6,7 +6,7 @@ export async function getStrapiEventsData (url: string) {
     const response = await fetch(`${baseUrl}${url}?populate=image`, {
       next: { 
         tags: ['events', 'all'], // For webhook-based revalidation
-        revalidate: 86400   // Cache for 24 hours (as backup)
+        revalidate: 60   // Fresh CMS content within a minute
       }
     });
      const data = await response.json();

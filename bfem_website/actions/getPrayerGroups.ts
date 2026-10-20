@@ -10,7 +10,7 @@ export async function getPrayerGroups() {
     const res = await fetch(`${apiUrl}/api/prayer-groups?populate=*`, {
       next: { 
         tags: ['prayergroups'], // For webhook-based revalidation
-        revalidate: 86400   // Cache for 24 hours (as backup)
+        revalidate: 60   // Fresh CMS content within a minute
       }
     });
 
@@ -39,7 +39,7 @@ export async function getConventions() {
     const res = await fetch(`${apiUrl}/api/conventions?populate=*`, {
       next: { 
         tags: ['conventions', 'all'], // For webhook-based revalidation
-        revalidate: 86400   // Cache for 24 hours (as backup)
+        revalidate: 60   // Fresh CMS content within a minute
       }
     });
 

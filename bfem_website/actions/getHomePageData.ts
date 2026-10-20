@@ -6,7 +6,7 @@ export async function getStrapiHomePageData (url: string) {
      const response = await fetch(baseUrl + url, {
       next: { 
         tags: ['homepage', 'all'], // For webhook-based revalidation
-        revalidate: 86400   // Cache for 24 hours (as backup)
+        revalidate: 60   // Fresh CMS content within a minute
       }
     });
      const data = await response.json();

@@ -18,7 +18,7 @@ async function getSermons(): Promise<SermonData[]> {
   const res = await fetch(`${apiUrl}/api/sermons?populate=*`, {
       next: { 
         tags: ['sermons'], // For webhook-based revalidation
-        revalidate: 86400   // Cache for 24 hours (as backup)
+        revalidate: 60   // Fresh CMS content within a minute
       }
     });
 
